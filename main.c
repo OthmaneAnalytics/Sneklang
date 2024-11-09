@@ -1,19 +1,62 @@
-#include <stdio.h>
+#include "munit.h"
+
+#include "coord.h"
+
+munit_case(RUN, test_new_coordinate1, {
+  struct Coordinate c;
+  c.x = 1;
+  c.y = 2;
+  c.z = 3;
+
+  assert_int(c.x, ==, 1, "should set x");
+  assert_int(c.y, ==, 2, "should set y");
+  assert_int(c.z, ==, 3, "should set z");
+});
+
+munit_case(RUN, test_new_coordinate2, {
+  struct Coordinate c;
+  c.x = 4;
+  c.y = 2;
+  c.z = 0;
+
+  assert_int(c.x, ==, 4, "should set x");
+  assert_int(c.y, ==, 2, "should set y");
+  assert_int(c.z, ==, 0, "should set z");
+});
+
+munit_case(SUBMIT, test_new_coordinate3, {
+  struct Coordinate c;
+  c.x = 10;
+  c.y = 20;
+  c.z = 30;
+
+  assert_int(c.x, ==, 10, "should set x");
+  assert_int(c.y, ==, 20, "should set y");
+  assert_int(c.z, ==, 30, "should set z");
+});
+
+munit_case(SUBMIT, test_new_coordinate4, {
+  struct Coordinate c;
+  c.x = 0;
+  c.y = 6;
+  c.z = 9;
+
+  assert_int(c.x, ==, 0, "should set x");
+  assert_int(c.y, ==, 6, "should set y");
+  assert_int(c.z, ==, 9, "should set z");
+});
 
 int main() {
-	int max_recursive_calls = 100;
-	char io_mode = 'w';
-	float throttle_speed = 0.2;
-	char *will_never_hear_again = "Hey TJ, when is the memory course in C gonna be done?";
-	int sneklang_default_max_threads = 8;
-	char sneklang_default_perms = 'r';
-	float sneklang_default_pi = 3.14159;
-	char *sneklang_title = "Sneklang";
- 
-	printf("Default max threads: %d\nCustom perms: %c\nConstant pi value: %f\nSneklang title: %s", sneklang_default_max_threads, sneklang_default_perms, sneklang_default_pi, sneklang_title);
-	// don't touch below this line
-	printf("Max recursive calls: %d\n", max_recursive_calls);
-	printf("IO mode: %c\n", io_mode);
-	printf("Throttle speed: %f\n", throttle_speed);
-	return 0;
+  MunitTest tests[] = {
+      munit_test("/create_coordinate1", test_new_coordinate1),
+      munit_test("/create_coordinate2", test_new_coordinate2),
+      munit_test("/create_coordinate3", test_new_coordinate3),
+      munit_test("/create_coordinate4", test_new_coordinate4),
+      munit_null_test,
+  };
+
+  MunitSuite suite = munit_suite("coordinates", tests);
+
+  return munit_suite_main(&suite, NULL, 0, NULL);
 }
+
