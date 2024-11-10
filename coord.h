@@ -1,5 +1,14 @@
 #pragma once
 
+typedef struct SneklangVar {
+  char type;
+  char is_constant;
+  char *name;
+  int value;
+  int scope_level;
+} sneklang_var_t;
+
+
 typedef struct Coordinate {
   int x;
   int y;
