@@ -1,13 +1,17 @@
 #include <stdio.h>
-#include "coord.h"
+#include "coordinate.h"
 
-
-int main() {
-
-  coordinate_t A = new_coord(3, 4, 1);
-  coordinate_t B = scale_coordinate(A, 2);
-  printf("B_x: %d ,B_y: %d , B_z: %d \n", B.x, B.y ,B.z );
-  printf("Size of sneklangVar %zu\n", sizeof(sneklang_var_t));
-  return 0;
+coordinate_t new_coordinate(int x, int y, int z) {
+  return (coordinate_t){.x = x, .y = y, .z = z};
 }
 
+int main(void){
+
+  coordinate_t coord = new_coordinate(1,3,6);
+  coordinate_update_x(coord,10);
+  printf("x %d, y %d, z %d\n",coord.x, coord.y, coord.z);
+  coordinate_t coord2 = coordinate_update_and_return_x(coord, 10);
+  printf("x %d, y %d, z %d\n",coord2.x, coord2.y, coord2.z);
+  
+  return 0;
+}
