@@ -1,17 +1,17 @@
 #include <stdio.h>
-#include "coordinate.h"
 
-coordinate_t new_coordinate(int x, int y, int z) {
-  return (coordinate_t){.x = x, .y = y, .z = z};
+void core_utils_func(int core_utilization[]) {
+  printf("sizeof core_utilization in core_utils_func: %zu\n",sizeof(core_utilization));
 }
 
-int main(void){
+// don't touch below this line
 
-  coordinate_t coord = new_coordinate(1,3,6);
-  coordinate_update_x(coord,10);
-  printf("x %d, y %d, z %d\n",coord.x, coord.y, coord.z);
-  coordinate_t coord2 = coordinate_update_and_return_x(coord, 10);
-  printf("x %d, y %d, z %d\n",coord2.x, coord2.y, coord2.z);
-  
+int main() {
+  int core_utilization[] = {43, 67, 89, 92, 71, 43, 56, 12};
+  int len = sizeof(core_utilization) / sizeof(core_utilization[0]);
+  printf("sizeof core_utilization in main: %zu\n", sizeof(core_utilization));
+  printf("len of core_utilization: %d\n", len);
+  core_utils_func(core_utilization);
   return 0;
 }
+

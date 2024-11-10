@@ -1,8 +1,8 @@
 #include "exercise.h"
 
-codefile_t change_filetype(codefile_t *f, int new_filetype){
-  codefile_t new_f = *f;
-  new_f.filetype = new_filetype;
-  return new_f;
+void update_file(int filedata[200], int new_filetype, int new_num_lines){
+  filedata[1] = new_num_lines;
+  filedata[2] = new_filetype;
+  filedata[199] = 0;
 }
 
