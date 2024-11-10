@@ -1,6 +1,8 @@
 #include "exercise.h"
 
-float get_average(int x, int y, int z){
-  return (float) (x + y + z) / 3.0;
+codefile_t change_filetype(codefile_t *f, int new_filetype){
+  codefile_t new_f = *f;
+  new_f.filetype = new_filetype;
+  return new_f;
 }
 
