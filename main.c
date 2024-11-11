@@ -1,17 +1,12 @@
+#include "exercise.h"
+#include <string.h>
 #include <stdio.h>
 
-void core_utils_func(int core_utilization[]) {
-  printf("sizeof core_utilization in core_utils_func: %zu\n",sizeof(core_utilization));
+int main(void){
+  TextBuffer dest;
+  strcat(dest.buffer, "This thll up the entire buffer.");
+  dest.length = 31;
+  const char* src = " Extra";
+  int result = smart_append(&dest, src);
+  printf("%d", result);
 }
-
-// don't touch below this line
-
-int main() {
-  int core_utilization[] = {43, 67, 89, 92, 71, 43, 56, 12};
-  int len = sizeof(core_utilization) / sizeof(core_utilization[0]);
-  printf("sizeof core_utilization in main: %zu\n", sizeof(core_utilization));
-  printf("len of core_utilization: %d\n", len);
-  core_utils_func(core_utilization);
-  return 0;
-}
-

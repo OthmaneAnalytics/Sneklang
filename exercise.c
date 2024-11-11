@@ -1,8 +1,16 @@
+#include <string.h>
 #include "exercise.h"
 
-void update_file(int filedata[200], int new_filetype, int new_num_lines){
-  filedata[1] = new_num_lines;
-  filedata[2] = new_filetype;
-  filedata[199] = 0;
+int smart_append(TextBuffer* dest, const char* src) {
+  if ( 63 - dest->length < strlen(src)){
+    strncpy(dest->buffer , src, 63 - dest->length);
+    dest->buffer[63] = '\0';
+    dest->length = 64;
+    return 1;
+  } else {
+    strcat(dest->buffer, src);
+    dest->length += strlen(src);
+    return 0;
+  }
 }
 
