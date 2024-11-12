@@ -1,32 +1,23 @@
 #include <stdio.h>
 
-#include "exercise.h"
+#include "limits.h"
 
+typedef union {
+  int value;
+  unsigned int err;
+} val_or_err_t;
 
 int main() {
-  char buffer1[100];
-  snek_object_t i1 = new_integer(5);
-  format_object(i1, buffer1);
+  val_or_err_t lanes_score = {
+    .value = -420
+  };
+  printf("value (set): %d\n", lanes_score.value);
+  printf("err (unset): %u\n", lanes_score.err);
 
-
-  char buffer2[100];
-  snek_object_t s1 = new_string("Hello!");
-  format_object(s1, buffer2);
-
-
-  char buffer3[100];
-  snek_object_t i2 = new_integer(2014);
-  format_object(i2 , buffer3);
-
-
-  char buffer4[100];
-  snek_object_t s2 = new_string("nvim btw");
-  format_object(s2, buffer4);
-
-  printf("%s\n", buffer2);
-  
-  return 0;
+  val_or_err_t teejs_score = {
+    .err = UINT_MAX
+  };
+  printf("value (unset): %d\n", teejs_score.value);
+  printf("err (set): %u\n", teejs_score.err);
 }
-
-
 
