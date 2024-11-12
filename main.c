@@ -1,12 +1,10 @@
-#include "exercise.h"
-#include <string.h>
+#include "http.h"
 #include <stdio.h>
 
-int main(void){
-  TextBuffer dest;
-  strcat(dest.buffer, "This thll up the entire buffer.");
-  dest.length = 31;
-  const char* src = " Extra";
-  int result = smart_append(&dest, src);
-  printf("%d", result);
+int main(void) {
+  HttpErrorCode code = HTTP_UNAUTHORIZED;
+  BigNumbers b = BIG;
+  printf("%s \n", http_to_str(code));
+  printf("the size of a big number is %zu \n",sizeof(b));
+  printf("the size of http error code is %zu \n",sizeof(code));
 }
