@@ -1,23 +1,15 @@
+#include "exercise.h"
+#include <string.h>
 #include <stdio.h>
 
-#include "limits.h"
-
-typedef union {
-  int value;
-  unsigned int err;
-} val_or_err_t;
 
 int main() {
-  val_or_err_t lanes_score = {
-    .value = -420
-  };
-  printf("value (set): %d\n", lanes_score.value);
-  printf("err (unset): %u\n", lanes_score.err);
+  packet_header_t header;
+  header.tcp_header.src_port = 0xA3;
+  header.tcp_header.dest_port = 0x5F;
+  header.tcp_header.seq_num = 0x9D3C;
+  printf("the raw packet header is %x\n", header.raw);  
 
-  val_or_err_t teejs_score = {
-    .err = UINT_MAX
-  };
-  printf("value (unset): %d\n", teejs_score.value);
-  printf("err (set): %u\n", teejs_score.err);
+  return 0;
 }
 
