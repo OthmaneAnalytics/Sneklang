@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "exercise.h"
 
-char* get_full_greeting(char *greeting, char *name, int size) {
-  char *full_greeting = (char*)malloc(100 * sizeof(char));
-  snprintf(full_greeting, 100, "%s %s", greeting, name);
-  return full_greeting;
+int *allocate_scalar_list(int size, int multiplier) {
+  int *arr = (int *)malloc(size *sizeof(int));
+  if(arr == NULL){
+    return NULL;
+  }
+  for (int i = 0; i<size; i++){
+    arr[i] = multiplier * i;
+  }
+  return arr;
 }
 
