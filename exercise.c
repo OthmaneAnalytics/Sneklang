@@ -1,16 +1,14 @@
-#include <stdio.h>
 #include <stdlib.h>
-
 #include "exercise.h"
 
 int *allocate_scalar_list(int size, int multiplier) {
-  int *arr = (int *)malloc(size *sizeof(int));
-  if(arr == NULL){
+  int *lst = (int *)malloc(size * sizeof(int));
+  if (lst == NULL) {
     return NULL;
   }
-  for (int i = 0; i<size; i++){
-    arr[i] = multiplier * i;
+  for (int i = 0; i < size; i++) {
+    lst[i] = i * multiplier;
   }
-  return arr;
+  return lst;
 }
 

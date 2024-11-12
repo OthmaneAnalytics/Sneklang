@@ -1,15 +1,19 @@
-#include "exercise.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "exercise.h"
 
-int main() {
-  int size = 5;
-  int multiplier = 2;
-  int *result = allocate_scalar_list(size, multiplier);
-  for (int i = 0; i < size; i++) {
-  printf("%d\n",result[i]);
+int main(){
+  const int num_lists = 50000;
+  for (int i = 0; i < num_lists; i++) {
+    int *lst = allocate_scalar_list(50000, 2);
+    if (lst == NULL) {
+      printf("Failed to allocate list\n");
+      return 1;
+    } else {
+      free(lst);
+      printf("Allocated list %d\n", i);
+    }
   }
-  free(result);
+  return 0;
 }
-
 
