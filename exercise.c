@@ -1,19 +1,6 @@
-#include "exercise.h"
-
-void snek_zero_out(void *ptr, snek_object_kind_t kind){
-  switch(kind){
-    case INTEGER:
-      ((snek_int_t*) ptr)->value = 0;
-      break;
-    case FLOAT:
-      ((snek_float_t*) ptr)->value = 0.0;
-      break;
-    case BOOL:
-      ((snek_bool_t*) ptr)->value = false;
-      break;
-    default:
-      break;
-  }
-    
+void swap_strings(char** a, char** b) {
+  char** c = a;
+  a = b;
+  b = c;
 }
 
