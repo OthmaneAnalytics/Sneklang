@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <stddef.h>
 
+void stack_free(stack_t *stack) {
+  if (stack == NULL){
+    return NULL;
+  }
+  free(stack->data);
+  free(stack);
+}
 
 void *stack_pop(stack_t *stack) {
   if (stack->count == 0) {
