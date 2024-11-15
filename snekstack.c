@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <stddef.h>
 
+
+void *stack_pop(stack_t *stack) {
+  if (stack->count == 0) {
+    return NULL;
+  }
+
+  stack->count--;
+  return stack->data[stack->count];
+}
+
 void stack_push(stack_t *stack, void *obj) {
   if (stack->count == stack->capacity){
     stack->capacity += stack->capacity;
