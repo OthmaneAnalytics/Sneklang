@@ -2,6 +2,29 @@
 #include <string.h>
 #include "snekobject.h"
 
+snek_object_t *new_snek_vector3(
+    snek_object_t *x, snek_object_t *y, snek_object_t *z
+) {
+  if ( x == NULL || y == NULL || z == NULL) {
+    return NULL;
+  }
+  snek_object_t* obj = (snek_object_t*) malloc(sizeof(snek_object_t));
+  if (obj == NULL){
+    return NULL;
+  }
+  obj->kind = VECTOR3;
+  snek_vector_t* vect = (snek_vector_t*) malloc(sizeof(snek_vector_t));
+  if (vect == NULL){
+    free(obj);
+    return NULL;
+  }
+  vect->x = x;
+  vect->y = y;
+  vect->z = z;
+  obj->data.v_vector3 = *vect;
+  return obj;
+}
+
 snek_object_t *new_snek_string(char* value) {
   snek_object_t* s_string = (snek_object_t*) malloc(sizeof(snek_object_t));
   if (s_string == NULL) {
