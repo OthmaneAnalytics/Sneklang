@@ -14,7 +14,7 @@ snek_object_t *new_snek_array(size_t size) {
   }
   obj->kind = ARRAY;
   snek_array_t n_array = {.size = size, .elements = arr};
-  obj->data->v_array = n_array;
+  obj->data.v_array = n_array;
   return obj;
 }
 

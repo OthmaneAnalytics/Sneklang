@@ -1,5 +1,12 @@
+#include <stddef.h>
+
 typedef struct Snekobj snek_object_t;
 
+
+typedef struct SnekArray{
+  size_t size;
+  snek_object_t** elements;
+} snek_array_t;
 
 typedef struct {
   snek_object_t* x;
@@ -23,10 +30,6 @@ typedef union {
   snek_array_t v_array;
 } snek_object_data_t;
 
-typedef struct {
-  size_t size;
-  snek_object_t** elements;
-} snek_array_t;
 
 typedef struct Snekobj{
   snek_object_kind_t kind;
