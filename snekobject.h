@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stddef.h>
 
 typedef struct Snekobj snek_object_t;

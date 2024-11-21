@@ -4,15 +4,18 @@
 
 
 bool snek_array_set(snek_object_t *snek_obj, size_t index, snek_object_t *value) {
-  if (snek_obj == NULL || snek_obj-> != ARRAY || index > snek_obj->data.v_array.size){
+  if (snek_obj == NULL || snek_obj->kind != ARRAY || index > snek_obj->data.v_array.size){
     return false;
   }
-  snek_obj->data.v_array->elements[index] = value;
+  snek_obj->data.v_array.elements[index] = value;
   return true;
 }
 
-snek_object_t *snek_array_get(snek_object_t *snek_obj, size_t index) {
-  // ?
+snek_object_t *snek_array_get(snek_object_t *snek_obj, size_t index) { 
+  if (snek_obj == NULL || snek_obj->kind != ARRAY || index > snek_obj->data.v_array.size){
+    return NULL;
+  }
+  return snek_obj->data.v_array.elements[index];
 }
 
 snek_object_t *new_snek_array(size_t size) {
