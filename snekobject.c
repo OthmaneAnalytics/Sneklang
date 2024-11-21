@@ -2,6 +2,22 @@
 #include <string.h>
 #include "snekobject.h"
 
+snek_object_t *new_snek_array(size_t size) {
+  snek_object_t* obj = (snek_object_t*) malloc(sizeof(snek_object_t));  
+  if (obj == NULL){
+    return NULL;
+  }
+  snek_object_t** arr = (snek_object_t**) calloc(size, sizeof(snek_object_t*));  
+  if (arr == NULL){
+    free(obj);
+    return NULL;
+  }
+  obj->kind = ARRAY;
+  snek_array_t n_array = {.size = size, .elements = arr};
+  obj->data->v_array = n_array;
+  return obj;
+}
+
 snek_object_t *new_snek_vector3(
     snek_object_t *x, snek_object_t *y, snek_object_t *z
 ) {
