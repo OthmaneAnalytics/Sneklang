@@ -1,6 +1,6 @@
 #include <stdbool.h>
 #include <stddef.h>
-
+#include <stdio.h>
 typedef struct Snekobj snek_object_t;
 
 

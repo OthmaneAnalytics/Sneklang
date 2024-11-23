@@ -12,15 +12,15 @@ snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
         return new_snek_integer(a->data.v_int + b->data.v_int);
       }
       if (b->kind == FLOAT){
-        return new_snek_integer( (float) a->data.v_int + b->data.v_float);
+        return new_snek_float( (float) a->data.v_int + b->data.v_float);
       }
       return NULL;
     case FLOAT:
       if (b->kind == INTEGER){
-        return new_snek_integer( a->data.v_float + (float) b->data.v_int);
+        return new_snek_float( a->data.v_float + (float) b->data.v_int);
       }
       if (b->kind == FLOAT){
-        return new_snek_integer( a->data.v_float + b->data.v_float);
+        return new_snek_float( a->data.v_float + b->data.v_float);
       }
       return NULL;
     case STRING:
@@ -44,13 +44,13 @@ snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
       }
       return NULL;
     case ARRAY:
-      if (b.kind == ARRAY) {
-        snek_object_t arr = new_snek_array(snek_length(a) + snek_length(b));
-        for (int i = 0, i < snek_length(a),i++) {
+      if (b->kind == ARRAY) {
+        snek_object_t* arr = new_snek_array(snek_length(a) + snek_length(b));
+        for (int i = 0; i < snek_length(a); i++) {
              snek_array_set(arr , i, snek_array_get(a, i));
              }
         int k = snek_length(a);
-        for (int i = 0, i < snek_length(b),i++) {
+        for (int i = 0; i < snek_length(b); i++) {
              snek_array_set(arr , k + i, snek_array_get(b, i));
              }
         return arr;
