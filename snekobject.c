@@ -2,6 +2,46 @@
 #include <string.h>
 #include "snekobject.h"
 
+snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
+  if (a == NULL || b== NULL) {
+    return NULL;
+  }
+  switch (a->kind){
+    case INTEGER:
+      if (b->kind == INTEGER){
+        return new_snek_integer(a->data.v_int + b->data.v_int);
+      }
+      if (b->kind == FLOAT){
+        return new_snek_integer( (float) a->data.v_int + b->data.v_float);
+      }
+      return NULL;
+    case FLOAT:
+      if (b->kind == INTEGER){
+        return new_snek_integer( a->data.v_float + (float) b->data.v_int);
+      }
+      if (b->kind == FLOAT){
+        return new_snek_integer( a->data.v_float + b->data.v_float);
+      }
+      return NULL;
+    case STRING:
+      if (b->kind == STRING) {
+        int len = snek_length(a) + snek_length(b);
+        char* cat = (char*) calloc(len, sizeof(char));
+        strcat( cat, a->data.v_string);
+        strcat( cat, b->data.v_string);
+        return new_snek_string(cat);
+      }
+      return NULL;
+    case VECTOR3:
+      return 3;
+    case ARRAY:
+      return (int) obj->data.v_array.size;
+    default:
+      return NULL;
+  }
+}
+
+
 int snek_length(snek_object_t *obj) {
   if (obj == NULL) {
     return -1;
