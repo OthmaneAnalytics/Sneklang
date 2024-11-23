@@ -29,13 +29,33 @@ snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
         char* cat = (char*) calloc(len, sizeof(char));
         strcat( cat, a->data.v_string);
         strcat( cat, b->data.v_string);
-        return new_snek_string(cat);
+        snek_object_t* obj = new_snek_string(cat);
+        free(cat);
+        return obj;
       }
       return NULL;
     case VECTOR3:
-      return 3;
+      if (b->kind == VECTOR3) {
+        return new_snek_vector3(
+          snek_add(a->data.v_vector3.x, b->data.v_vector3.x),
+          snek_add(a->data.v_vector3.y, b->data.v_vector3.y),
+          snek_add(a->data.v_vector3.z, b->data.v_vector3.z)
+        );
+      }
+      return NULL;
     case ARRAY:
-      return (int) obj->data.v_array.size;
+      if (b.kind == ARRAY) {
+        snek_object_t arr = new_snek_array(snek_length(a) + snek_length(b));
+        for (int i = 0, i < snek_length(a),i++) {
+             snek_array_set(arr , i, snek_array_get(a, i));
+             }
+        int k = snek_length(a);
+        for (int i = 0, i < snek_length(b),i++) {
+             snek_array_set(arr , k + i, snek_array_get(b, i));
+             }
+        return arr;
+      }
+      return NULL;
     default:
       return NULL;
   }
