@@ -6,7 +6,7 @@ void refcount_dec(snek_object_t *obj) {
   if (obj != NULL) {
     obj->refcount -= 1;
     if (obj->refcount == 0) {
-      ref_count_free(obj);
+      refcount_free(obj);
     }
   }
 }
