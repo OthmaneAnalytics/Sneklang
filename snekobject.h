@@ -35,6 +35,7 @@ typedef union {
 typedef struct Snekobj{
   snek_object_kind_t kind;
   snek_object_data_t data;
+  int refcount;
 } snek_object_t;
 
 snek_object_t *new_snek_integer(int value);
@@ -46,4 +47,4 @@ bool snek_array_set(snek_object_t *array, size_t index, snek_object_t *value);
 snek_object_t *snek_array_get(snek_object_t *array, size_t index);
 int snek_length(snek_object_t *obj);
 snek_object_t *snek_add(snek_object_t *a, snek_object_t *b);
-
+snek_object_t* _new_snek_object();
