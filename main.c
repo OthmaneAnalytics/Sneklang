@@ -3,14 +3,26 @@
 
 #include "snekobject.h"
 
-int main() {
+int main (){
   snek_object_t *obj = new_snek_integer(10);
-  printf("%d\n",obj->data.v_int);
+
+  refcount_inc(obj);
+  printf("%d\n", obj->refcount);
   free(obj);
 
-  snek_object_t *obj2 = new_snek_float(42.0);
-  printf("%f\n",obj2->data.v_float);
-  free(obj2);
+  snek_object_t *obj1 = new_snek_float(4.20);
+
+  refcount_inc(obj1);
+  refcount_inc(obj1);
+  refcount_inc(obj1);
+  refcount_inc(obj1);
+  refcount_inc(obj1);
+
+  printf("%d\n", obj1->refcount);
+  free(obj1);
+
+  refcount_inc(NULL);
+
 
   return 0;
 }
