@@ -4,9 +4,9 @@
 
 void refcount_dec(snek_object_t *obj) {
   if (obj != NULL) {
-    obj->refcount -= 1;
+    obj->refcount--;
     if (obj->refcount == 0) {
-      refcount_free(obj);
+    refcount_free(obj);
     }
   }
 }
@@ -24,6 +24,11 @@ void refcount_free(snek_object_t *obj) {
       refcount_dec(obj->data.v_vector3.x);
       refcount_dec(obj->data.v_vector3.y);
       refcount_dec(obj->data.v_vector3.z);
+      free(obj);
+    case ARRAY:
+      for (int i = 0; i <snek_length(obj); i++) {
+        refcount_dec(obj->data.v_array.elements[i]);
+      }
       free(obj);
   }
 }
@@ -127,6 +132,10 @@ bool snek_array_set(snek_object_t *snek_obj, size_t index, snek_object_t *value)
   if (snek_obj == NULL || snek_obj->kind != ARRAY || index > snek_obj->data.v_array.size){
     return false;
   }
+  refcount_inc(value);
+  if (snek_obj->data.v_array.elements[index] != NULL) {
+    snek_obj->data.v_array.elements[index]->refcount--;
+  }
   snek_obj->data.v_array.elements[index] = value;
   return true;
 }
@@ -152,7 +161,6 @@ snek_object_t *new_snek_array(size_t size) {
 
   obj->kind = ARRAY;
   obj->data.v_array = (snek_array_t){.size = size, .elements = elements};
-
   return obj;
 }
 

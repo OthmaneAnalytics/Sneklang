@@ -3,21 +3,36 @@
 
 #include "snekobject.h"
 
+
 int main() {
   snek_object_t *foo = new_snek_integer(1);
   snek_object_t *bar = new_snek_integer(2);
   snek_object_t *baz = new_snek_integer(3);
-  printf("foo ref count %d \n ",foo->refcount);
-  snek_object_t *vec = new_snek_vector3(foo, bar, baz);
-  printf("foo ref count %d \n ",foo->refcount);
-  printf("vec ref count %d \n ",vec->refcount);
-  refcount_dec(foo);
-  printf("foo ref count after foo decrement %d \n ",foo->refcount);
-  printf("bar ref count after foo decrement %d \n ",bar->refcount);
-  refcount_dec(vec);
-  printf("decremented vec");
-  printf("vec ref count after decrement %d \n ",vec->refcount);
-  //printf("foo ref count %d \n ",foo->refcount);
+
+  snek_object_t *array = new_snek_array(2);
+  printf("ref count of foo %d \n", foo->refcount);  
+  printf("ref count of array %d \n", array->refcount);  
+  snek_array_set(array, 0, foo); 
+  snek_array_set(array, 1, bar);
+
+  printf("ref count of foo after adding foo and bar %d \n", foo->refcount);  
+  printf("ref count of array %d \n", array->refcount);  
+  snek_array_set(array, 0, baz);
+  
+  printf("ref count of foo after replacing foo by baz %d \n", foo->refcount);  
+  printf("ref count of array %d \n", array->refcount);  
+  printf("ref count of baz %d \n", baz->refcount);  
+  printf("ref count of foo %d \n", foo->refcount);  
+
+  refcount_dec(array);
+
+
+  printf("ref count of baz after decrementing array %d \n", baz->refcount);  
+
+  printf("ref count of foo %d \n", foo->refcount);  
+  printf("ref count of bar (next we decrement bar) %d \n", bar->refcount);  
+  refcount_dec(bar);
+
   return 0;
 }
 
