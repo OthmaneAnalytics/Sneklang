@@ -4,6 +4,7 @@
 #include "stack.h"
 
 void stack_push(stack_t *stack, void *obj) {
+
   if (stack->count == stack->capacity) {
     // Double stack capacity to avoid reallocing often
     stack->capacity *= 2;

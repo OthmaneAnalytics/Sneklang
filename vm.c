@@ -1,4 +1,10 @@
 #include "vm.h"
+#include "snekobject.h"
+#include "stack.h"
+
+void vm_track_object(vm_t *vm, snek_object_t *obj) {
+  stack_push(vm->objects, obj);
+}
 
 void vm_frame_push(vm_t *vm, frame_t *frame) {
   stack_push(vm->frames,frame);
@@ -7,7 +13,7 @@ void vm_frame_push(vm_t *vm, frame_t *frame) {
 frame_t *vm_new_frame(vm_t *vm) {
   frame_t* frame = (frame_t*) malloc(sizeof(frame_t));
   frame->references = stack_new(8);
-  stack_push(vm->frames,frame);
+  vm_frame_push(vm, frame);
   return frame;
 }
 
